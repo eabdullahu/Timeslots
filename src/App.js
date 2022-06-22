@@ -1,19 +1,22 @@
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchData } from 'redux/app/actions';
+
 function App() {
+  const dispatch = useDispatch();
+  const { error, loading, companies } = useSelector(state => state.ts)
+  const fetchDataDispatch = useCallback(() => dispatch(fetchData()), [dispatch])
+
+  useEffect(() => {
+    fetchDataDispatch();
+  }, [fetchDataDispatch])
+
+  console.log(error, loading, companies);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
     </div>
   );
