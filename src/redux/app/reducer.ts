@@ -47,7 +47,7 @@ export const timeslotsReducer = (state = initialState, action: any) => {
       }
     case REMOVE_TIMESLOT: 
       const selectedTimeSlots = state.selectedTimeSlots;
-      if(selectedTimeSlots[action.payload.key]) delete selectedTimeSlots[action.payload.key];
+      if(selectedTimeSlots[action.payload.key] >= 0) delete selectedTimeSlots[action.payload.key];
       return {
         ...state,
         selectedTimeSlots 

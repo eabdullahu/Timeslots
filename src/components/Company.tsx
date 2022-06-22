@@ -26,7 +26,7 @@ export default function Company(props: CompanyInterface) {
   }
 
   const isSelected = (index: number) => {
-    return selectedTimeSlots[props.index] && selectedTimeSlots[props.index] === index
+    return selectedTimeSlots[props.index] >= 0 && selectedTimeSlots[props.index] === index
   }
   
   const isDisabled = (timeslot: Timeslot) => {
@@ -52,7 +52,7 @@ export default function Company(props: CompanyInterface) {
           <h4 className='title'>{ props.name }</h4>
           <p className='sub-title'>{ props.type }</p>
         </div>
-        { selectedTimeSlots[props.index] && (
+        { selectedTimeSlots[props.index] >= 0 && (
           <span className='selected' onClick={ removeTimeSlot }>
             {`${toTime(props.time_slots[selectedTimeSlots[props.index]]['start_time'])} - ${toTime(props.time_slots[selectedTimeSlots[props.index]]['end_time'])}`}
           </span>
