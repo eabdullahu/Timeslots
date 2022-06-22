@@ -1,4 +1,4 @@
 export default interface Timeslot {
-  start_time: Date;
-  end_time: Date;
+  start_time: string;
+  end_time: string;
 }

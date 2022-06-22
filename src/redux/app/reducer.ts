@@ -2,19 +2,23 @@ import {
   FETCH_DATA, 
   FETCH_DATA_SUCCESS,
   FETCH_DATA_ERROR,
+  SELECT_TIMESLOT,
+  REMOVE_TIMESLOT
 } from './types'
 import { Company } from '../../types/Company';
 
-export interface contractorRegistrationReducer {
+export interface CompanyState {
   isLoading: boolean;
   error: string;
   companies: Array<Company>;
+  selectedTimeSlots?: any
 }
 
-export const initialState = {
+export const initialState: CompanyState = {
   isLoading: false,
   companies: null,
-  error: null
+  error: null,
+  selectedTimeSlots: {}
 };
 
 export const timeslotsReducer = (state = initialState, action: any) => {
@@ -33,6 +37,21 @@ export const timeslotsReducer = (state = initialState, action: any) => {
       };
     case FETCH_DATA_ERROR:
       return initialState;
+    case SELECT_TIMESLOT: 
+      return {
+        ...state,
+        selectedTimeSlots: {
+          ...state.selectedTimeSlots,
+          [action.payload.key]: action.payload.value
+        }
+      }
+    case REMOVE_TIMESLOT: 
+      const selectedTimeSlots = state.selectedTimeSlots;
+      if(selectedTimeSlots[action.payload.key]) delete selectedTimeSlots[action.payload.key];
+      return {
+        ...state,
+        selectedTimeSlots 
+      }
     default:
       return state
   }

@@ -5,4 +5,5 @@ export interface Company {
   name: string;
   type: string;
   time_slots: Array<Timeslot>;
+  index?: number
 }
